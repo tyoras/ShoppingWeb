@@ -1,5 +1,1 @@
 node_modules/
-dist
-app/bower_components/
-npm-debug.log
-app/js/bundled.js
