@@ -1,14 +1,15 @@
 import {Component} from 'angular2/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+
+import {LoginComponent} from './login/login.component';
 
 @Component({
     selector: 'shopping-app',
-    template: `
-    	<div class="container">
-	    	<div class="jumbotron">
-	    		<h1>Shopping App</h1>
-	    		<p>A small web application to manage and share shopping lists<p>
-			</div>
-		</div>
-    `
+    templateUrl: 'app/app.component.html',
+    styleUrls: ['app/app.component.css'],
+    directives: [ROUTER_DIRECTIVES]
 })
+@RouteConfig([
+	{path: '/login', name: 'Login', component: LoginComponent}
+])
 export class AppComponent { }
