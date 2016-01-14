@@ -1,4 +1,5 @@
 ShoppingWeb.sublime-workspace
+.gitconfig
 node_modules/
 app/**/*.js
 app/**/*.map
