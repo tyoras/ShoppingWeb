@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter} from "angular2/core";
+/*import {Injectable, EventEmitter} from "angular2/core";
 import {Http, Headers} from 'angular2/http';
 
 import {ConfigService} from './config.service';
@@ -167,3 +167,4 @@ export class AuthService {
         }, {});
     };
 }
+*/

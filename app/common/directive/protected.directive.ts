@@ -1,4 +1,4 @@
-import {Directive, OnDestroy} from 'angular2/core';
+/*import {Directive, OnDestroy} from 'angular2/core';
 import {AuthService} from '../service/auth.service';
 import {ROUTER_DIRECTIVES, Router, Location} from "angular2/router";
 
@@ -27,4 +27,4 @@ export class ProtectedDirective implements OnDestroy {
             this.sub.unsubscribe();
         }
     }
-}
+}*/
