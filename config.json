@@ -6,6 +6,6 @@
         "port" : 8080,
         "root" : "shopping/rest",
         "api_endpoint" : "/api",
-        "auth_endpoint" : "/auth"
+        "auth_endpoint" : "/auth/token"
     }
 }

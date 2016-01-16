@@ -1,23 +1,25 @@
-/*import {Directive, OnDestroy} from 'angular2/core';
+import {Directive, OnInit, OnDestroy} from 'angular2/core';
 import {AuthService} from '../service/auth.service';
 import {ROUTER_DIRECTIVES, Router, Location} from "angular2/router";
 
 @Directive({
     selector: '[protected]'
 })
-export class ProtectedDirective implements OnDestroy {
+export class ProtectedDirective implements OnInit, OnDestroy {
     private sub:any = null;
 
-    constructor(private authService:AuthService, private router:Router, private location:Location) {
-        if (!authService.isAuthenticated()) {
+    constructor(private authService:AuthService, private router:Router, private location:Location) { }
+
+    ngOnInit() {
+        if (!this.authService.isAuthenticated()) {
             this.location.replaceState('/');
-            this.router.navigate(['PublicPage']);
+            this.router.navigate(['Login']);
         }
 
         this.sub = this.authService.subscribe((val) => {
             if (!val.authenticated) {
                 this.location.replaceState('/');
-                this.router.navigate(['LoggedoutPage']);
+                this.router.navigate(['Login']);
             }
         });
     }
@@ -27,4 +29,4 @@ export class ProtectedDirective implements OnDestroy {
             this.sub.unsubscribe();
         }
     }
-}*/
+}

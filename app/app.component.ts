@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
+import {AuthService} from './common/service/auth.service';
 
 @Component({
     selector: 'shopping-app',
@@ -14,4 +15,17 @@ import {LoginComponent} from './login/login.component';
     {path: '/', name: 'Home', component: HomeComponent},
 	{path: '/login', name: 'Login', component: LoginComponent}
 ])
-export class AppComponent { }
+export class AppComponent {
+
+	constructor(private authService: AuthService) {
+
+	} 
+
+	authenticated() {
+        return this.authService.isAuthenticated();
+    }
+
+    logout() {
+		this.authService.logout();
+    }
+}
