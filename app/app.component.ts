@@ -1,9 +1,12 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import {tokenNotExpired} from 'angular2-jwt';
+
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {AuthService} from './common/service/auth.service';
+
 
 @Component({
     selector: 'shopping-app',
@@ -22,7 +25,7 @@ export class AppComponent {
 	} 
 
 	authenticated() {
-        return this.authService.isAuthenticated();
+        return tokenNotExpired();
     }
 
     logout() {

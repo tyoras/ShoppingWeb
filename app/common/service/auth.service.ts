@@ -38,6 +38,7 @@ export class AuthService {
             .subscribe(respAsJson => {
                 console.log(respAsJson);
                 this.token = respAsJson.access_token;
+                localStorage.setItem('id_token', this.token);
                 let expiresSeconds = Number(respAsJson.expires_in) || 1800;
                 if (this.token) {
                     this.authenticated = true;

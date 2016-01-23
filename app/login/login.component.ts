@@ -1,7 +1,8 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from 'angular2/common'
-import {Router, Location} from 'angular2/router';
+import {Router, Location, CanActivate} from 'angular2/router';
 
+import {tokenNotExpired} from 'angular2-jwt';
 import {Subscription} from 'rxjs/Subscription';
 
 import {ConfigService} from '../common/service/config.service';
@@ -14,6 +15,7 @@ import {AuthService} from '../common/service/auth.service';
     styleUrls: ['app/login/login.component.css'],
     directives: [FORM_DIRECTIVES]
 })
+@CanActivate(() => !tokenNotExpired())
 export class LoginComponent implements OnInit, OnDestroy {
     private config: Config;
     private configSubscription: Subscription<Config>; //useful to unsubscribe the config stream
@@ -30,11 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.configService.load();
-        if (this.authService.isAuthenticated) {
-            //FIXME seems not working
-            this.location.replaceState('/');
-            this.router.navigate(['Login']);
-        } 
     }
 
     doLogin(event) {

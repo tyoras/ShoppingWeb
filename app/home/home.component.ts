@@ -1,5 +1,7 @@
 import {Component} from 'angular2/core';
 
+import {tokenNotExpired} from 'angular2-jwt';
+
 import {AuthService} from '../common/service/auth.service';
 
 @Component({
@@ -14,6 +16,6 @@ export class HomeComponent {
 	}
 
 	isAuthenticated(): boolean {
-		return this.authService.isAuthenticated();
+		return tokenNotExpired();
 	}
 }
