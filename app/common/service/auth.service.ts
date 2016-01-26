@@ -51,6 +51,7 @@ export class AuthService {
     }
 
     logout() {
+        localStorage.removeItem('id_token');
         this.authenticated = false;
         this.expiresTimerId = null;
         this.expires = 0;

@@ -14,29 +14,34 @@
     <!-- 1. Load libraries -->
     <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
+    
+
+    <!-- 2. Configure SystemJS -->
+    <script>
+      System.config({
+        defaultJSExtensions: true,
+        packages: {        
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          },
+          "/angular2-jwt": {
+            defaultExtension: 'js'
+          } 
+        },
+        map: {
+            "angular2-jwt": "node_modules/angular2-jwt/angular2-jwt"
+        }
+      });
+      System.import('app/boot')
+            .then(null, console.error.bind(console));
+    </script>
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
     <script src="node_modules/angular2/bundles/router.dev.js"></script>
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
-
-    <!-- 2. Configure SystemJS -->
-    <script>
-      System.config({
-        packages: {        
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          },
-          map: {
-            "angular2-jwt": "node_modules/angular2-jwt"
-          }
-        }
-      });
-      System.import('app/boot')
-            .then(null, console.error.bind(console));
-    </script>
 
   </head>
 
