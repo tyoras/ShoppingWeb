@@ -18,7 +18,7 @@ import {AuthService} from '../common/service/auth.service';
 @CanActivate(() => !tokenNotExpired())
 export class LoginComponent implements OnInit, OnDestroy {
     private config: Config;
-    private configSubscription: Subscription<Config>; //useful to unsubscribe the config stream
+    private configSubscription: Subscription; //useful to unsubscribe the config stream
     private loginForm: ControlGroup;
 
     constructor(fb: FormBuilder, private router: Router, private location: Location, private configService: ConfigService, private authService: AuthService) {
@@ -34,9 +34,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.configService.load();
     }
 
-    doLogin(event) {
-        this.authService.loginPasswordFlow(this.loginForm.value.email, this.loginForm.value.password);
-        event.preventDefault();
+    doLogin(value: any) {
+        this.authService.loginPasswordFlow(value.email, value.password)
+        .subscribe(
+            () => this.router.navigate(['../Home']),
+            (error) => console.log(error) //TODO better handling of the error
+        );
     }
 
     ngOnDestroy() {
