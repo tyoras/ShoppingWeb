@@ -1,6 +1,8 @@
 import {Injectable} from "angular2/core";
 import {Http, Headers} from 'angular2/http';
 
+import {Observable} from 'rxjs/Observable';
+
 import {ConfigService} from './config.service';
 import {BackendService} from './backend.service';
 import {Config} from '../config';
@@ -13,9 +15,7 @@ export class AuthService {
     private authenticated: boolean = false;
     private token: string;
     private expires: any = 0;
-    private userInfo: any = {};
     private expiresTimerId: any = null;
-    private userName: string;
 
     constructor(private configService: ConfigService, private backendService: BackendService, private http: Http) {
         //config will be updated whenever a new config is pushed 
@@ -45,8 +45,8 @@ export class AuthService {
                 this.expires = new Date();
                 this.expires = this.expires.setSeconds(this.expires.getSeconds() + expiresSeconds);
 
-                this.backendService.loadRoot();
-                console.log(this.backendService.getLink("user"));
+                this.backendService.loadRoot().subscribe(() => console.log(this.backendService.getLink("user")) );
+                
             });
     }
 
@@ -59,7 +59,7 @@ export class AuthService {
     }
 
     getSession() {
-        return {authenticated: this.authenticated, token: this.token, expires: this.expires, userName : this.userName};
+        return {authenticated: this.authenticated, token: this.token, expires: this.expires};
     }
 
     private startExpiresTimer(seconds:number) {
