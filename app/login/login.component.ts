@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService.loginPasswordFlow(value.email, value.password)
         .subscribe(
             () => this.router.navigate(['../Home']),
-            (error) => console.log(error) //TODO better handling of the error
+            (error) => console.error(error) //TODO better handling of the error
         );
     }
 

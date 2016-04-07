@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
 import {tokenNotExpired} from 'angular2-jwt';
 
@@ -14,7 +14,7 @@ import {AuthService} from './common/service/auth.service';
     templateUrl: 'app/app.component.html',
     styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
-    providers: [ROUTER_PROVIDERS, AuthService]
+    providers: [ROUTER_PROVIDERS]
 })
 @RouteConfig([
     {path: '/', name: 'Home', component: HomeComponent},
@@ -24,7 +24,7 @@ import {AuthService} from './common/service/auth.service';
 ])
 export class AppComponent {
 
-	constructor(private authService: AuthService) {
+    constructor(private authService: AuthService, private router: Router) {
 
 	} 
 
@@ -33,6 +33,7 @@ export class AppComponent {
     }
 
     logout() {
-		this.authService.logout();
+        this.authService.logout();
+        this.router.navigate(['/Home']);
     }
 }
