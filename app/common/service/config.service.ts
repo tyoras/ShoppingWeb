@@ -3,6 +3,7 @@ import {Http, Headers} from 'angular2/http'
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
+import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 
 import {Config} from '../config';

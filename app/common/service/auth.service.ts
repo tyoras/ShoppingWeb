@@ -46,7 +46,7 @@ export class AuthService {
                 this.expires = this.expires.setSeconds(this.expires.getSeconds() + expiresSeconds);
 
                 this.backendService.loadRoot().subscribe(
-                    () => console.log(this.backendService.getLink("user")) 
+                    () => {} 
                 );
                 
             });

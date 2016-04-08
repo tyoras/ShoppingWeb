@@ -14,7 +14,6 @@ export class BackendService {
     private rootEndpointUrl: string;
     private connectedUserId: string;
     private apis: APILink[] = [];
-    private cachedRoots = {};
 
     constructor(private configService: ConfigService, private http: Http, private authHttp: AuthHttp) {
         //config will be updated whenever a new config is pushed 
@@ -42,28 +41,12 @@ export class BackendService {
 		this.apis = [];
 		for (var link of rootAsJson.links) {
 			this.apis.push(new APILink(link));
-			let linkRel = link.rel;
-			if (linkRel !== "self") {
-				this.authHttp.options(this.getLink(linkRel), { headers: headers })
-					.map(response => response.json())
-					.subscribe(r => {
-						this.cachedRoots[linkRel] = [];
-						for (var l of r.links) {
-							this.cachedRoots[linkRel].push(new APILink(l));
-							
-						}	
-					});
-			}
 		}
 
     }
 
     getLink(rel: string) : string {
 		return this.apis.filter(link => link.rel === rel)[0].href;
-    }
-
-    getRootByRel(rel: string): APILink[] {
-		return this.cachedRoots[rel];
     }
 
     getConnectedUserId() : string {

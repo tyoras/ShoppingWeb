@@ -22,8 +22,7 @@ export class ConnectedHomeComponent implements OnInit {
 
 	ngOnInit() {
 		console.log("on init connected home")
-        this.userService.getConnectedUser().subscribe(user => { this.connectedUser = user; console.log(user.name) });
-        // this.connectedUser = new User({id : "1", name : "yoan", email : "yo@yo.com"});
+        this.userService.getConnectedUser().subscribe(user => { this.connectedUser = user });
     }
 
 	isAuthenticated(): boolean {
@@ -31,7 +30,6 @@ export class ConnectedHomeComponent implements OnInit {
 	}
 
 	getConnectedUser() : User {
-		console.log("get connected user")
 		return this.connectedUser;
 	}
 }
