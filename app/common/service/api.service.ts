@@ -12,7 +12,7 @@ interface ApiCallback {
 
 export class ApiService {
     private apis: APILink[];
-    protected acceptHeaders: Headers = new Headers({ 'Accept': 'application/json' });
+    protected acceptHeader: Headers = new Headers({ 'Accept': 'application/json' });
 
     constructor(private apiRel: string, protected authHttp: AuthHttp, protected backend: BackendService) {
         if (!tokenNotExpired()) {
@@ -39,7 +39,7 @@ export class ApiService {
     /**
      * ensure root is loaded before searching API link to use
      */
-    requestAPI<T>(rel: string, replacements: any, request: ApiCallback): Observable<T> {
+    requestAPI<T>(rel: string, request: ApiCallback, replacements?: any): Observable<T> {
         if (this.apis) {
             return request(this.replacePlaceholders(this.getLink(rel), replacements));
         } else {
@@ -52,7 +52,10 @@ export class ApiService {
     }
 
     replacePlaceholders(link: string, replacements: any) {
-        console.log("link is "+link)
-        return link.replace(/%7B\w+%7D/g, placeholder => { console.log("found : " + placeholder); return replacements[placeholder] || placeholder; });
+        if (replacements) {
+            return link.replace(/%7B\w+%7D/g, placeholder => replacements[placeholder] || placeholder);
+        } else {
+            return link;
+        }
     }
 }
