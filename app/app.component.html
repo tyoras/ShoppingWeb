@@ -14,7 +14,7 @@
             <li *ngIf="authenticated()"><a [routerLink]="['Protected']"> Protected</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+            <li *ngIf="!authenticated()"><a [routerLink]="['Register']"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
             </li>
             <li *ngIf="!authenticated()"><a [routerLink]="['Login']"><span class="glyphicon glyphicon-log-in"></span> Login</a>
             </li>

@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from 'angular2/common'
+import {FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from 'angular2/common';
 import {Router, Location, CanActivate} from 'angular2/router';
 
 import {tokenNotExpired} from 'angular2-jwt';
