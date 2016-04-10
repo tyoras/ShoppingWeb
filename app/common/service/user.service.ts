@@ -42,31 +42,24 @@ export class UserService extends ApiService {
     }
 
     create(user: User): Observable<User> {
-        let headers: Headers = new Headers({ 'Accept': 'application/json' });
-        headers.append('Content-Type', 'application/json');
-
         let serializedUser: string = JSON.stringify(user);
-        return this.requestAPI("create", (link: string) => this.authHttp.post(link, serializedUser, { headers: headers })
+        return this.requestAPI("create", (link: string) => this.authHttp.post(link, serializedUser, { headers: this.acceptContentTypeHeaders })
                                                                 .map(response => response.json())
                                                                 .map(userAsJson => this.parseUser(userAsJson))
         );
     }
 
     update(user: User): Observable<User> {
-        let headers: Headers = new Headers({ 'Accept': 'application/json' });
-        headers.append('Content-Type', 'application/json');
         let replacements = { "%7BuserId%7D": user.id };
 
         let serializedUser: string = JSON.stringify(user);
-        return this.requestAPI("update", (link: string) => this.authHttp.put(link, serializedUser, { headers: headers }), replacements);
+        return this.requestAPI("update", (link: string) => this.authHttp.put(link, serializedUser, { headers: this.acceptContentTypeHeaders }), replacements);
     }
 
     changePassword(userId: string, password: string): Observable<User> {
-        let headers: Headers = new Headers({ 'Accept': 'application/json' });
-        headers.append('Content-Type', 'application/json');
         let replacements = { "%7BuserId%7D": userId, "%7BnewPassword%7D": password };
 
-        return this.requestAPI("changePassword", (link: string) => this.authHttp.put(link, null, { headers: headers }), replacements);
+        return this.requestAPI("changePassword", (link: string) => this.authHttp.put(link, null, { headers: this.acceptContentTypeHeaders }), replacements);
     }
 
     deleteById(userId: string): Observable<User> {

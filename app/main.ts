@@ -10,6 +10,7 @@ import {ConfigService} from './common/service/config.service';
 import {AuthService} from './common/service/auth.service';
 import {BackendService} from './common/service/backend.service';
 import {UserService} from './common/service/user.service';
+import {RegisterUserService} from './common/service/register-user.service';
 
 bootstrap(AppComponent, [
 	ROUTER_PROVIDERS, 
@@ -17,7 +18,8 @@ bootstrap(AppComponent, [
 	ConfigService, 
 	AuthService,
 	BackendService,
-	UserService, 
+	UserService,
+	RegisterUserService, 
 	provide(AuthHttp, {
 		useFactory: (http) => {
 			return new AuthHttp(new AuthConfig(), http);

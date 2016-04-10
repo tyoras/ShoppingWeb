@@ -5,6 +5,7 @@ import {Router, Location, CanActivate} from 'angular2/router';
 import {tokenNotExpired} from 'angular2-jwt';
 
 import {UserService} from '../common/service/user.service';
+import {RegisterUserService} from '../common/service/register-user.service';
 import {User} from '../common/user';
 
 @Component({
@@ -16,7 +17,7 @@ import {User} from '../common/user';
 export class ConnectedHomeComponent implements OnInit {
 	connectedUser: User = new User({});
 
-	constructor(private userService: UserService) {
+	constructor(private userService: UserService, private registerService: RegisterUserService) {
 
 	}
 
@@ -25,7 +26,7 @@ export class ConnectedHomeComponent implements OnInit {
 		let userToCreate: User = new User({ name: "testAngular4", email: "angular@test5.com"});
 		userToCreate.password = "test";
         this.userService.getConnectedUser().subscribe(user => this.connectedUser = user);
-        this.userService.create(userToCreate).subscribe(user2 => {
+        this.registerService.register(userToCreate).subscribe(user2 => {
 			console.log("user created with id : " + user2.id);
 			user2.email = "modified@test.com";
 			this.userService.update(user2).subscribe(() => {

@@ -27,9 +27,10 @@ export class AuthService {
     }
 
     loginPasswordFlow(email: string, password: string) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        headers.append('Accept', 'application/json');
+        let headers = new Headers({
+            'Content-Type' : 'application/x-www-form-urlencoded',
+            'Accept' : 'application/json'
+        });
 
         let body = `grant_type=password&client_id=${this.config.clientId}&client_secret=not_required&username=${email}&password=${password}`;
         return this.http.post(this.oauth2TokenEndpointUrl, body, { headers: headers })
@@ -48,7 +49,6 @@ export class AuthService {
                 this.backendService.loadRoot().subscribe(
                     () => {} 
                 );
-                
             });
     }
 

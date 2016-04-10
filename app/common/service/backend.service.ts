@@ -35,8 +35,6 @@ export class BackendService {
     }
 
     private parseRoot(rootAsJson: any) {
-		let headers = new Headers();
-		headers.append('Accept', 'application/json');
 		this.connectedUserId = rootAsJson.connectedUserId;
 		this.apis = [];
 		for (var link of rootAsJson.links) {

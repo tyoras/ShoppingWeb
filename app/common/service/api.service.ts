@@ -12,7 +12,8 @@ interface ApiCallback {
 
 export class ApiService {
     private apis: APILink[];
-    protected acceptHeader: Headers = new Headers({ 'Accept': 'application/json' });
+    protected acceptHeader: Headers = new Headers({ 'Accept' : 'application/json' });
+    protected acceptContentTypeHeaders: Headers = new Headers({ 'Accept' : 'application/json', 'Content-Type' : 'application/json'});
 
     constructor(private apiRel: string, protected authHttp: AuthHttp, protected backend: BackendService) {
         if (!tokenNotExpired()) {
