@@ -13,8 +13,8 @@
             <li [class.active]="router.isRouteActive(router.generate(['/Home']))">
                 <a [routerLink]="['Home']"><span class="glyphicon glyphicon-home"></span> Home</a>
             </li>
-            <li *ngIf="authenticated()" [class.active]="router.isRouteActive(router.generate(['/Protected']))">
-                <a [routerLink]="['Protected']"> Protected</a>
+            <li *ngIf="authenticated()" [class.active]="router.isRouteActive(router.generate(['/Profile']))">
+                <a [routerLink]="['Profile']"><span class="glyphicon glyphicon-user"></span> Profile</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
