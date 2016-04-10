@@ -9,24 +9,25 @@ import {RegisterUserService} from '../common/service/register-user.service';
 import {User} from '../common/user';
 
 @Component({
-    selector: 'connected-home',
-    templateUrl: 'app/connected-home/connected-home.component.html',
-    styleUrls: ['app/connected-home/connected-home.component.css']
+    selector: 'profile',
+    templateUrl: 'app/profile/profile.component.html',
+    styleUrls: ['app/profile/profile.component.css']
 })
 @CanActivate(() => tokenNotExpired())
-export class ConnectedHomeComponent implements OnInit {
+export class ProfileComponent implements OnInit {
+	
 	connectedUser: User = new User({});
 
-	constructor(private userService: UserService, private registerService: RegisterUserService) {
+	constructor(private userService: UserService) {
 
 	}
 
 	ngOnInit() {
 		console.log("on init connected home");
-		let userToCreate: User = new User({ name: "testAngular4", email: "angular@test5.com"});
+		let userToCreate: User = new User({ name: "testAngular4", email: "angular@test5.com" });
 		userToCreate.password = "test";
         this.userService.getConnectedUser().subscribe(user => this.connectedUser = user);
-        this.registerService.register(userToCreate).subscribe(user2 => {
+        this.userService.create(userToCreate).subscribe(user2 => {
 			console.log("user created with id : " + user2.id);
 			user2.email = "modified@test.com";
 			this.userService.update(user2).subscribe(() => {
@@ -44,11 +45,4 @@ export class ConnectedHomeComponent implements OnInit {
 		});
     }
 
-	isAuthenticated(): boolean {
-		return tokenNotExpired();
-	}
-
-	getConnectedUser() : User {
-		return this.connectedUser;
-	}
 }

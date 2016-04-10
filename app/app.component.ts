@@ -6,7 +6,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {ConnectedHomeComponent} from './connected-home/connected-home.component';
+import {ProfileComponent} from './profile/profile.component';
 import {AuthService} from './common/service/auth.service';
 
 
@@ -21,7 +21,7 @@ import {AuthService} from './common/service/auth.service';
     {path: '/', name: 'Home', component: HomeComponent},
 	{path: '/login', name: 'Login', component: LoginComponent},
     {path: '/register', name: 'Register', component: RegisterComponent},
-	{path: '/protected', name: 'Protected', component: ConnectedHomeComponent},
+    { path: '/profile', name: 'Profile', component: ProfileComponent },
 	{path: '/**', redirectTo: ['Home']}
 ])
 export class AppComponent {
