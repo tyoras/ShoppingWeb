@@ -1,7 +1,9 @@
 ShoppingWeb.sublime-workspace
 ShoppingWeb.sublime-project
 .gitconfig
+npm-debug.log
 node_modules/
 typings/
+docker/dist/**
 app/**/*.js
 app/**/*.map
