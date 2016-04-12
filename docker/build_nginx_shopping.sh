@@ -1,1 +1,1 @@
-docker build -t tyoras/nginx_shopping .
+docker build -t tyoras/shopping_nginx:$1 .

@@ -4,6 +4,6 @@ ShoppingWeb.sublime-project
 npm-debug.log
 node_modules/
 typings/
-docker/dist/**
+docker/dist/*
 app/**/*.js
 app/**/*.map
