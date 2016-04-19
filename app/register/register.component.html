@@ -1,32 +1,30 @@
 <section id="register">
-    <div class="container">
-    	<div class="omb_login">
-        	<h1 class="omb_authTitle">Join Shopping App</h1>
+    <div class="container shaweb_form_container">
+    	<h1 class="shaweb_form_title">Join Shopping App</h1>
 
-    		<div class="row omb_row-sm-offset-3">
-    			<div class="col-xs-12 col-sm-6">	
-    			    <form [ngFormModel]="registerForm" (submit)="registerUser(registerForm.value)" class="omb_loginForm" autocomplete="off">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input ngControl="name" type="text" class="form-control" placeholder="Username">
-                        </div>
-                        <span class="help-block"></span>
-    					<div class="input-group">
-    						<span class="input-group-addon"><i class="fa fa-at"></i></span>
-    						<input ngControl="email" type="email" class="form-control" placeholder="Email address">
-    					</div>
-    					<span class="help-block"></span>
-    										
-    					<div class="input-group">
-    						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-    						<input  ngControl="password" type="password" class="form-control" placeholder="Password">
-    					</div>
-                        <span class="help-block"></span>
+		<div class="row shaweb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-6">	
+			    <form [ngFormModel]="registerForm" (submit)="registerUser(registerForm.value)" class="shaweb_form" autocomplete="off">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input ngControl="name" type="text" class="form-control" placeholder="Username">
+                    </div>
+                    <span class="help-block"></span>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-at"></i></span>
+						<input ngControl="email" type="email" class="form-control" placeholder="Email address">
+					</div>
+					<span class="help-block"></span>
+										
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input  ngControl="password" type="password" class="form-control" placeholder="Password">
+					</div>
+                    <span class="help-block"></span>
 
-    					<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!registerForm.valid">Create an account</button>
-    				</form>
-    			</div>
-        	</div>
-        </div>   	
+					<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!registerForm.valid">Create an account</button>
+				</form>
+			</div>
+    	</div> 	
 	</div>
 </section>
