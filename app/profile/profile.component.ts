@@ -1,5 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-
+import {FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from 'angular2/common';
 import {Router, Location, CanActivate} from 'angular2/router';
 
 import {tokenNotExpired} from 'angular2-jwt';
@@ -11,15 +11,20 @@ import {User} from '../common/user';
 @Component({
     selector: 'profile',
     templateUrl: 'app/profile/profile.component.html',
-    styleUrls: ['app/profile/profile.component.css']
+    styleUrls: ['app/profile/profile.component.css'],
+    directives: [FORM_DIRECTIVES]
 })
 @CanActivate(() => tokenNotExpired())
 export class ProfileComponent implements OnInit {
 	
 	connectedUser: User = new User({});
+	private profileForm: ControlGroup;
 
-	constructor(private userService: UserService) {
-
+	constructor(fb: FormBuilder, private router: Router, private location: Location, private userService: UserService) {
+		this.profileForm = fb.group({
+			name: ["", Validators.required],
+            email: ["", Validators.required]
+        });
 	}
 
 	ngOnInit() {
@@ -43,6 +48,16 @@ export class ProfileComponent implements OnInit {
 				});
 			});
 		});
+    }
+
+    updateUser(value: any) {
+		let userToUpdate: User = new User(value);
+		userToUpdate.id = this.connectedUser.id;
+		this.userService.update(userToUpdate)
+			.subscribe(
+			() => this.router.navigate(['../Profile']),
+			(error) => console.error(error) //TODO better handling of the error
+			);
     }
 
 }

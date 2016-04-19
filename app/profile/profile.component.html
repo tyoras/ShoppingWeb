@@ -1,37 +1,62 @@
-<h1>Profile</h1>
+<section id="profile">
+	<div class="container shaweb_form_container">
+		<h1>Profile</h1>
 
-<h2>Connected User :</h2>
-<p>id : {{connectedUser.id}}</p>
-<p>name : {{connectedUser.name}}</p>
-<p>email : {{connectedUser.email}}</p>
-<p>creation date : {{connectedUser.creationDate | date:'medium'}}</p>
-<p>last update : {{connectedUser.lastUpdate | date:'medium'}}</p>
+		<h2>Connected User :</h2>
+		<p>id : {{connectedUser.id}}</p>
+		<p>name : {{connectedUser.name}}</p>
+		<p>email : {{connectedUser.email}}</p>
+		<p>creation date : {{connectedUser.creationDate | date:'medium'}}</p>
+		<p>last update : {{connectedUser.lastUpdate | date:'medium'}}</p>
 
+		 <form class="form-horizontal well" role="form">
+	 		<div class="form-group">
+		    <label class="control-label col-sm-2" for="name">Username:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" ngControl="name" placeholder="Enter name">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="email">Email:</label>
+		    <div class="col-sm-10">
+		      <input type="email" class="form-control" ngControl="email" placeholder="Enter email">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-lg btn-primary btn-block">Update</button>
+		    </div>
+		  </div>
+		</form>
 
-	<div class="well profile">
-	    <ul class="nav nav-tabs">
-	      <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
-	      <li><a href="#profile" data-toggle="tab">Password</a></li>
-	    </ul>
-	    <div id="myTabContent" class="tab-content">
-	      <div class="tab-pane active in" id="home">
-	        <form id="tab">
-	            <label>Username</label>
-	            <input type="text" value={{connectedUser.name}} class="input-xlarge">
-	            <label>Email</label>
-	            <input type="text" value={{connectedUser.email}} class="input-xlarge">
-	          	<div>
-	        	    <button class="btn btn-primary">Update</button>
-	        	</div>
-	        </form>
-	      </div>
-	      <div class="tab-pane fade" id="profile">
-	    	<form id="tab2">
-	        	<label>New Password</label>
-	        	<input type="password" class="input-xlarge">
-	        	<div>
-	        	    <button class="btn btn-primary">Update</button>
-	        	</div>
-	    	</form>
-	      </div>
-	  </div>
+    	<h1 class="shaweb_form_title">Update profile</h1>
+		<div class="row shaweb_row-sm-offset-3 œ">
+			<div class="col-xs-12 col-sm-6">	
+			    <form [ngFormModel]="profileForm" (submit)="updateUser(profileForm.value)" class="shaweb_form form-horizontal" autocomplete="off" role="form">
+                    <div class="form-group">
+                    	<label class="control-label col-sm-2" for="name">Username:</label>
+                    	<!-- <div class="col-sm-10"> -->
+                    		<div class="input-group">
+		                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+		                        <input id="name" ngControl="name" type="text" class="form-control" value={{connectedUser.name}} placeholder="Enter name">
+	                        </div>
+                        <!-- </div> -->
+                    </div>
+                    <span class="help-block"></span>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">Email:</label>
+						<!-- <div class="col-sm-10"> -->
+                    		<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-at"></i></span>
+								<input id="email" ngControl="email" type="email" class="form-control" value="{{connectedUser.email}}" placeholder="Enter email">
+							</div>
+						<!-- </div> -->
+					</div>
+					<span class="help-block"></span>
+					<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!profileForm.valid">Update</button>
+				</form>
+			</div>
+    	</div> 	
+	</div>
+</section>

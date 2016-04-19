@@ -1,9 +1,9 @@
 {
     "client_id" : "d1f53029-9732-4d00-ba8e-0304020bef6b",
     "backend" : {
-        "protocol" : "http",
-        "host" : "localhost",
-        "port" : 8080,
+        "protocol" : "https",
+        "host" : "shopping-app.io",
+        "port" : 8443,
         "root" : "shopping/rest",
         "api_endpoint" : "/api",
         "auth_endpoint" : "/auth/token"
