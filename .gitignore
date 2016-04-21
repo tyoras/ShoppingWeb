@@ -6,3 +6,4 @@ node_modules/
 typings/
 docker/dist/*
 dist/
+coverage/
