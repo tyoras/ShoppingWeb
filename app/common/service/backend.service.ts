@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {Http, Headers} from 'angular2/http';
+import {Http, Headers, Request, RequestMethod} from 'angular2/http';
 
 import {AuthHttp, tokenNotExpired} from 'angular2-jwt';
 import {Observable} from 'rxjs/Observable';
@@ -29,7 +29,12 @@ export class BackendService {
     loadRoot() : Observable<any> {
 		let headers = new Headers();
 		headers.append('Accept', 'application/json');
-		return this.authHttp.options(this.rootEndpointUrl, { headers: headers })
+        let request: Request = new Request({
+            url: this.rootEndpointUrl,
+            method: RequestMethod.Options,
+            headers: headers
+        });
+        return this.authHttp.request(request)
 			.map(response => response.json())
 			.map(rootAsJson => this.parseRoot(rootAsJson));
     }

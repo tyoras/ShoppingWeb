@@ -1,4 +1,4 @@
-import {Headers} from 'angular2/http';
+import {Headers, Request, RequestMethod} from 'angular2/http';
 
 import {AuthHttp, tokenNotExpired} from 'angular2-jwt';
 import {Observable} from 'rxjs/Observable';
@@ -22,9 +22,15 @@ export class ApiService {
     }
 
     loadRoot(): Observable<any> {
-        let headers = new Headers();
+        let url:string = this.backend.getLink(this.apiRel);
+        let headers:Headers = new Headers();
         headers.append('Accept', 'application/json');
-        return this.authHttp.options(this.backend.getLink(this.apiRel), { headers: headers })
+        let request: Request = new Request({
+            url: url,
+            method: RequestMethod.Options,
+            headers: headers
+        });
+        return this.authHttp.request(request)
             .map(response => response.json())
             .map(rootAsJson => this.parseRoot(rootAsJson));
     }
