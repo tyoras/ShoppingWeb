@@ -3,6 +3,7 @@ import {FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from 'angular2/c
 import {Router, Location, CanActivate} from 'angular2/router';
 
 import {tokenNotExpired} from 'angular2-jwt/angular2-jwt';
+import {Md5} from 'ts-md5/dist/md5';
 
 import {UserService} from '../common/service/user.service';
 import {User} from '../common/user';
@@ -18,6 +19,7 @@ export class ProfileComponent implements OnInit {
 	
 	connectedUser: User = new User({});
 	private profileForm: ControlGroup;
+	gravatarId: string;
 
 	constructor(fb: FormBuilder, private router: Router, private location: Location, private userService: UserService) {
 		this.profileForm = fb.group({
@@ -30,7 +32,10 @@ export class ProfileComponent implements OnInit {
 		console.log('on init connected home');
 		let userToCreate: User = new User({ name: 'testAngular4', email: 'angular@test5.com' });
 		userToCreate.password = 'test';
-        this.userService.getConnectedUser().subscribe(user => this.connectedUser = user);
+        this.userService.getConnectedUser().subscribe(user => {
+			this.connectedUser = user;
+			this.gravatarId = this.getGravatarId(user.email);
+		});
         this.userService.create(userToCreate).subscribe(user2 => {
 			console.log('user created with id : ' + user2.id);
 			user2.email = 'modified@test.com';
@@ -57,6 +62,10 @@ export class ProfileComponent implements OnInit {
 			() => this.router.navigate(['../Profile']),
 			(error) => console.error(error) //TODO better handling of the error
 			);
+    }
+
+    getGravatarId(email: string) {
+		return Md5.hashStr(email);
     }
 
 }

@@ -1,62 +1,46 @@
 <section id="profile">
 	<div class="container shaweb_form_container">
-		<h1>Profile</h1>
-
-		<h2>Connected User :</h2>
-		<p>id : {{connectedUser.id}}</p>
-		<p>name : {{connectedUser.name}}</p>
-		<p>email : {{connectedUser.email}}</p>
-		<p>creation date : {{connectedUser.creationDate | date:'medium'}}</p>
-		<p>last update : {{connectedUser.lastUpdate | date:'medium'}}</p>
-
-		 <form class="form-horizontal well" role="form">
-	 		<div class="form-group">
-		    <label class="control-label col-sm-2" for="name">Username:</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" ngControl="name" placeholder="Enter name">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label class="control-label col-sm-2" for="email">Email:</label>
-		    <div class="col-sm-10">
-		      <input type="email" class="form-control" ngControl="email" placeholder="Enter email">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-lg btn-primary btn-block">Update</button>
-		    </div>
-		  </div>
-		</form>
-
-    	<h1 class="shaweb_form_title">Update profile</h1>
-		<div class="row shaweb_row-sm-offset-3 œ">
-			<div class="col-xs-12 col-sm-6">	
-			    <form [ngFormModel]="profileForm" (submit)="updateUser(profileForm.value)" class="shaweb_form form-horizontal" autocomplete="off" role="form">
-                    <div class="form-group">
-                    	<label class="control-label col-sm-2" for="name">Username:</label>
-                    	<!-- <div class="col-sm-10"> -->
-                    		<div class="input-group">
-		                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-		                        <input id="name" ngControl="name" type="text" class="form-control" value={{connectedUser.name}} placeholder="Enter name">
+		<div class="well">
+	    	<h1 class="shaweb_form_title">Update profile</h1>
+			<div class="row shaweb_row-sm-offset-3">
+				<div class="col-xs-12 col-sm-6">	
+				    <form [ngFormModel]="profileForm" (submit)="updateUser(profileForm.value)" class="shaweb_form form-horizontal" autocomplete="off" role="form">
+				    	<div class="form-group">
+					    	<img src="http://www.gravatar.com/avatar/{{gravatarId}}?d=identicon" class="col-sm-2" alt="avatar"/>
+					    	<div class="col-sm-10">
+					    		<a href="http://gravatar.com/emails" target="_blank" class="btn btn-success" role="button">Change avatar on Gravatar</a>
+					    	</div>
+				    	</div>
+	                    <div class="form-group">
+	                    	<label class="control-label col-sm-2" for="name">Username:</label>
+	                    	<div class="col-sm-10">
+	                    		<div class="input-group">
+			                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+			                        <input id="name" ngControl="name" type="text" class="form-control" value={{connectedUser.name}} placeholder="Enter name">
+		                        </div>
 	                        </div>
-                        <!-- </div> -->
-                    </div>
-                    <span class="help-block"></span>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="email">Email:</label>
-						<!-- <div class="col-sm-10"> -->
-                    		<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-at"></i></span>
-								<input id="email" ngControl="email" type="email" class="form-control" value="{{connectedUser.email}}" placeholder="Enter email">
+	                    </div>
+	                    <span class="help-block"></span>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="email">Email:</label>
+							<div class="col-sm-10">
+	                    		<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-at"></i></span>
+									<input id="email" ngControl="email" type="email" class="form-control" value="{{connectedUser.email}}" placeholder="Enter email">
+								</div>
 							</div>
-						<!-- </div> -->
-					</div>
-					<span class="help-block"></span>
-					<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!profileForm.valid">Update</button>
-				</form>
-			</div>
-    	</div> 	
+						</div>
+						<span class="help-block"></span>
+						<div class="form-group">
+					    	<span class="col-sm-2"><b>Last update:</b></span>
+					    	<div class="col-sm-10">
+					    		{{connectedUser.lastUpdate | date:'medium'}}
+					    	</div>
+				    	</div>
+						<button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!profileForm.valid">Update</button>
+					</form>
+				</div>
+	    	</div>
+    	</div>
 	</div>
 </section>
