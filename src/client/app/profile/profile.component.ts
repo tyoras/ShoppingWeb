@@ -17,9 +17,9 @@ import {User} from '../common/user';
 @CanActivate(() => tokenNotExpired())
 export class ProfileComponent implements OnInit {
 	
-	connectedUser: User = new User({});
-	private profileForm: ControlGroup;
+	connectedUser: User;
 	gravatarId: string;
+	private profileForm: ControlGroup;
 
 	constructor(fb: FormBuilder, private router: Router, private location: Location, private userService: UserService) {
 		this.profileForm = fb.group({
@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
 			);
     }
 
-    getGravatarId(email: string) {
+    getGravatarId(email: string): string {
 		return Md5.hashStr(email);
     }
 

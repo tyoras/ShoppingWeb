@@ -16,7 +16,7 @@
 	                    	<div class="col-sm-10">
 	                    		<div class="input-group">
 			                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-			                        <input id="name" ngControl="name" type="text" class="form-control" value={{connectedUser.name}} placeholder="Enter name">
+			                        <input id="name" ngControl="name" type="text" class="form-control" value={{connectedUser?.name}} placeholder="Enter name">
 		                        </div>
 	                        </div>
 	                    </div>
@@ -26,7 +26,7 @@
 							<div class="col-sm-10">
 	                    		<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-at"></i></span>
-									<input id="email" ngControl="email" type="email" class="form-control" value="{{connectedUser.email}}" placeholder="Enter email">
+									<input id="email" ngControl="email" type="email" class="form-control" value="{{connectedUser?.email}}" placeholder="Enter email">
 								</div>
 							</div>
 						</div>
@@ -34,7 +34,7 @@
 						<div class="form-group">
 					    	<span class="col-sm-2"><b>Last update:</b></span>
 					    	<div class="col-sm-10">
-					    		{{connectedUser.lastUpdate | date:'medium'}}
+					    		{{connectedUser?.lastUpdate | date:'medium'}}
 					    	</div>
 				    	</div>
 						<button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!profileForm.valid">Update</button>
