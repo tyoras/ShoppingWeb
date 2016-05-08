@@ -23,16 +23,12 @@ export class ApiService {
 
     loadRoot(): Observable<any> {
         let url:string = this.backend.getLink(this.apiRel);
-        let headers:Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        let request: Request = new Request({
-            url: url,
-            method: RequestMethod.Options,
-            headers: headers
-        });
-        return this.authHttp.request(request)
-            .map(response => response.json())
-            .map(rootAsJson => this.parseRoot(rootAsJson));
+        if (url) {
+            return this.callRootAPI(url); 
+        } else {
+            return this.backend.getAsyncLink(this.apiRel).flatMap(foundURL => this.callRootAPI(foundURL));
+        }
+        
     }
 
     /**
@@ -56,6 +52,19 @@ export class ApiService {
         } else {
             return link;
         }
+    }
+
+    private callRootAPI(url: string): Observable<any> {
+        let headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        let request: Request = new Request({
+            url: url,
+            method: RequestMethod.Options,
+            headers: headers
+        });
+        return this.authHttp.request(request)
+            .map(response => response.json())
+            .map(rootAsJson => this.parseRoot(rootAsJson));
     }
 
     private parseRoot(rootAsJson: any) {

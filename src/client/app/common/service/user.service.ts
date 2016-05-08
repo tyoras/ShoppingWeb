@@ -16,7 +16,11 @@ export class UserService extends ApiService {
     }
 
     getConnectedUser(): Observable<User> {
-        return this.getById(this.backend.getConnectedUserId());
+        let connectedUserId = this.backend.getConnectedUserId();
+        if (connectedUserId) {
+            return this.getById(connectedUserId);
+        }
+        return this.backend.getAsyncConnectedUserId().flatMap(foundUserId => this.getById(foundUserId));
     }
 
     getById(userId: string): Observable<User> {

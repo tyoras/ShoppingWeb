@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
 			this.connectedUser = user;
 			this.gravatarId = this.getGravatarId(user.email);
 		});
-        this.userService.create(userToCreate).subscribe(user2 => {
+        /*this.userService.create(userToCreate).subscribe(user2 => {
 			console.log('user created with id : ' + user2.id);
 			user2.email = 'modified@test.com';
 			this.userService.update(user2).subscribe(() => {
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
 					});
 				});
 			});
-		});
+		});*/
     }
 
     updateUser(value: any) {

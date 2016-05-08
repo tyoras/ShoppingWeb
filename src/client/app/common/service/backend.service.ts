@@ -13,7 +13,7 @@ export class BackendService {
 	private config: Config;
     private rootEndpointUrl: string;
     private connectedUserId: string;
-    private apis: APILink[] = [];
+    private apisRoots: APILink[] = [];
 
     constructor(private configService: ConfigService, private http: Http, private authHttp: AuthHttp) {
         //config will be updated whenever a new config is pushed 
@@ -39,20 +39,33 @@ export class BackendService {
 			.map(rootAsJson => this.parseRoot(rootAsJson));
     }
 
-    getLink(rel: string) : string {
-		return this.apis.filter(link => link.rel === rel)[0].href;
+    getLink(rel: string): string {
+        if (!this.apisRoots || this.apisRoots.length === 0) {
+            return null;
+        }
+        return this.apisRoots.filter(link => link.rel === rel)[0].href;
     }
 
-    getConnectedUserId() : string {
+    getAsyncLink(rel: string): Observable<string> {
+        return this.loadRoot().map(() => this.getLink(rel));
+    }
+
+    getConnectedUserId(): string {
 		return this.connectedUserId;
+    }
+
+    getAsyncConnectedUserId(): Observable<string> {
+        return this.loadRoot().map(() => this.getConnectedUserId());
     }
 
     private parseRoot(rootAsJson: any) {
         this.connectedUserId = rootAsJson.connectedUserId;
-        this.apis = [];
+        this.apisRoots = [];
         for (var link of rootAsJson.links) {
-            this.apis.push(new APILink(link));
+            this.apisRoots.push(new APILink(link));
         }
 
     }
+
+    
 }
