@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
 		});*/
     }
 
-    updateUser(value: any) {
+    updateUser(value: any): void {
 		let userToUpdate: User = new User(value);
 		userToUpdate.id = this.connectedUser.id;
 		this.userService.update(userToUpdate)
