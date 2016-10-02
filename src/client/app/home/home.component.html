@@ -10,26 +10,3 @@
 <ul>
   <li *ngFor="let name of names">{{name}}</li>
 </ul>
-
-<div *ngIf="user">
-  <h2>{{user.name}} details : </h2>
-  <img src="http://www.gravatar.com/avatar/{{gravatarId}}?d=identicon" class="col-sm-2" alt="avatar" />
-  <div class="col-sm-10">
-    <a href="http://gravatar.com/emails" target="_blank" class="btn btn-success" role="button">Change avatar on Gravatar</a>
-  </div>
-  <div><label>id: </label>{{user.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="user.name" placeholder="name" />
-  </div>
-  <div>
-    <label>email: </label>
-    <input [(ngModel)]="user.email" placeholder="email" />
-  </div>
-  <div>
-    <label>creation date: </label> {{user.creationDate | date:'medium'}}
-  </div>
-  <div>
-    <label>last update: </label> {{user.lastUpdate | date:'medium'}}
-  </div>
-</div>

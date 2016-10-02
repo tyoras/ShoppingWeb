@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Md5} from 'ts-md5/dist/md5';
-
-import { NameListService, UserService, AlertService, User } from '../shared/index';
+import { NameListService, AlertService } from '../shared/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -19,8 +17,6 @@ export class HomeComponent implements OnInit {
   newName: string = '';
   errorMessage: string;
   names: any[] = [];
-  user: User;
-  gravatarId: string;
 
   /**
    * Creates an instance of the HomeComponent with the injected
@@ -28,14 +24,13 @@ export class HomeComponent implements OnInit {
    *
    * @param {NameListService} nameListService - The injected NameListService.
    */
-  constructor(public nameListService: NameListService, private userService: UserService, private alertService: AlertService) { }
+  constructor(public nameListService: NameListService, private alertService: AlertService) { }
 
   /**
    * Get the names OnInit
    */
   ngOnInit() {
     this.getNames();
-    this.getUser();
   }
 
   /**
@@ -59,21 +54,6 @@ export class HomeComponent implements OnInit {
     this.alertService.error(this.newName);
     this.newName = '';
     return false;
-  }
-
-  getUser() {
-    this.userService.getConnectedUser()
-      .subscribe(
-      user => {
-        this.user = user;
-        this.gravatarId = this.getGravatarId(user.email);
-      },
-      error => this.errorMessage = <any>error
-      );
-  }
-
-  getGravatarId(email: string): string {
-    return Md5.hashStr(email);
   }
 
 }
