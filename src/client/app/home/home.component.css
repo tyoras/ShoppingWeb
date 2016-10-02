@@ -1,4 +1,13 @@
-.jumbotron {
-  background-color: #0f6ab4;
-  color: #fff;
+:host {
+  display: block;
+  padding: 0 16px;
+}
+
+input {
+  width: 250px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 0 0 8px;
 }

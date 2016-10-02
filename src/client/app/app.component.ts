@@ -1,41 +1,18 @@
-import {Component} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import { Component } from '@angular/core';
+import { Config} from './shared/index';
 
-import {tokenNotExpired} from 'angular2-jwt/angular2-jwt';
-
-import {HomeComponent} from './home/home.component';
-import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
-import {ProfileComponent} from './profile/profile.component';
-import {AuthService} from './common/service/auth.service';
-
-
+/**
+ * This class represents the main application component. Within the @Routes annotation is the configuration of the
+ * applications routes, configuring the paths for the lazy loaded components (HomeComponent, AboutComponent).
+ */
 @Component({
-    selector: 'shopping-app',
-    templateUrl: 'app/app.component.html',
-    styleUrls: ['app/app.component.css'],
-    directives: [ROUTER_DIRECTIVES],
-    providers: [ROUTER_PROVIDERS]
+  moduleId: module.id,
+  selector: 'sweb-app',
+  templateUrl: 'app.component.html',
 })
-@RouteConfig([
-    {path: '/', name: 'Home', component: HomeComponent},
-	{path: '/login', name: 'Login', component: LoginComponent},
-    {path: '/register', name: 'Register', component: RegisterComponent},
-    { path: '/profile', name: 'Profile', component: ProfileComponent },
-	{path: '/**', redirectTo: ['Home']}
-])
+
 export class AppComponent {
-
-    constructor(private authService: AuthService, private router: Router) {
-
-	} 
-
-	authenticated() {
-        return tokenNotExpired();
-    }
-
-    logout() {
-        this.authService.logout();
-        this.router.navigate(['/Home']);
-    }
+  constructor() {
+    console.log('Environment config', Config);
+  }
 }

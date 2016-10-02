@@ -1,37 +1,34 @@
-import {Component} from 'angular2/core';
-import {FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from 'angular2/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {Router, Location} from 'angular2/router';
-
-import {RegisterUserService} from '../common/service/register-user.service';
-import {User} from '../common/user';
+import { AlertService, RegisterUserService } from '../shared/index';
 
 @Component({
-    selector: 'register',
-    templateUrl: 'app/register/register.component.html',
-    styleUrls: ['app/register/register.component.css'],
-    directives: [FORM_DIRECTIVES]
+  moduleId: module.id,
+  templateUrl: 'register.component.html'
 })
+
 export class RegisterComponent {
+  model: any = {};
+  loading = false;
 
-    private registerForm: ControlGroup;
+  constructor(
+    private router: Router,
+    private registerService: RegisterUserService,
+    private alertService: AlertService) { }
 
-    constructor(fb: FormBuilder, private router: Router, private location: Location, private registerService: RegisterUserService) {
-        this.registerForm = fb.group({
-			name: ['', Validators.required],
-            email: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-    }
-
-    registerUser(value: any) {
-		let userToCreate: User = new User(value);
-		userToCreate.password = value.password;
-		this.registerService.register(userToCreate)
-			.subscribe(
-				() => this.router.navigate(['../Login']),
-            	(error) => console.error(error) //TODO better handling of the error
-			);
-    }
-
+  register() {
+    this.loading = true;
+    this.registerService.register(this.model).subscribe(
+      user => {
+        this.alertService.success(`Registration of user ${user.name} is successful`, true);
+        this.router.navigate(['/login']);
+      },
+      error => {
+        //TODO handle 409 conflict status
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
+  }
 }

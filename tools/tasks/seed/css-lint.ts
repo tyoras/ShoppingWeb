@@ -1,43 +1,57 @@
+import * as colorguard from 'colorguard';
+import * as doiuse from 'doiuse';
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as reporter from 'postcss-reporter';
 import * as stylelint from 'stylelint';
-import * as doiuse from 'doiuse';
-import * as colorguard from 'colorguard';
-import {join} from 'path';
-import {APP_SRC, APP_ASSETS, BROWSER_LIST, CSS_SRC, ENV} from '../../config';
+import { join } from 'path';
+
+import Config from '../../config';
+
 const plugins = <any>gulpLoadPlugins();
 
-const isProd = ENV === 'prod';
+const isProd = Config.ENV === 'prod';
+var stylesheetType = Config.ENABLE_SCSS ? 'scss' : 'css';
 
 const processors = [
   doiuse({
-    browsers: BROWSER_LIST,
+    browsers: Config.BROWSER_LIST,
   }),
-  colorguard(),
+  colorguard({
+    whitelist: Config.COLOR_GUARD_WHITE_LIST
+  }),
   stylelint(),
   reporter({clearMessages: true})
 ];
 
-function lintComponentCss() {
+function lintComponentStylesheets() {
   return gulp.src([
-      join(APP_SRC, '**', '*.css'),
-      '!' + join(CSS_SRC, '**', '*.css')
-    ])
+    join(Config.APP_SRC, '**', `*.${stylesheetType}`),
+    `!${join(Config.APP_SRC, 'assets', '**', '*.scss')}`,
+    `!${join(Config.CSS_SRC, '**', '*.css')}`
+  ]).pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
+}
+
+function lintExternalStylesheets() {
+  return gulp.src(getExternalStylesheets().map(r => r.src))
     .pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
-    .pipe(plugins.postcss(processors));
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
 }
 
-function lintExternalCss() {
-  return gulp.src(getExternalCss().map(r => r.src))
-    .pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
-    .pipe(plugins.postcss(processors));
+function getExternalStylesheets() {
+  let stylesheets = Config.ENABLE_SCSS ? Config.DEPENDENCIES : Config.APP_ASSETS;
+  return stylesheets
+    .filter(d => new RegExp(`\.${stylesheetType}$`)
+    .test(d.src) && !d.vendor);
 }
 
-function getExternalCss() {
-  return APP_ASSETS.filter(d => /\.css$/.test(d.src) && !d.vendor);
-}
-
-
-export = () => merge(lintComponentCss(), lintExternalCss());
+/**
+ * Executes the build process, linting the component and external CSS files using `stylelint`.
+ */
+export = () => merge(lintComponentStylesheets(), lintExternalStylesheets());
