@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
 import { Config } from '../config/env.config';
-import { AUTH_TOKEN_STORAGE_NAME } from '../constants';
+import { AUTH_TOKEN_STORAGE_NAME, CONNECTED_USER_ID_STORAGE_NAME } from '../constants';
+import { Helper } from '../helpers';
 
 @Injectable()
 export class AuthService {
@@ -26,8 +27,10 @@ export class AuthService {
       .map(response => response.json())
       .map(respAsJson => {
         if (respAsJson && respAsJson.access_token) {
-          //TODO find how to put more user info
-          localStorage.setItem(AUTH_TOKEN_STORAGE_NAME, respAsJson.access_token);
+          let jwt = respAsJson.access_token;
+          let decodedJWT = Helper.decodeJWT(jwt);
+          localStorage.setItem(CONNECTED_USER_ID_STORAGE_NAME, decodedJWT.sub);
+          localStorage.setItem(AUTH_TOKEN_STORAGE_NAME, jwt);
           let expiresSeconds = Number(respAsJson.expires_in) || 600;
           this.startExpiresTimer(expiresSeconds);
         }
@@ -36,6 +39,7 @@ export class AuthService {
 
   logout() {
     // remove user from local storage to log user out
+    localStorage.removeItem(CONNECTED_USER_ID_STORAGE_NAME);
     localStorage.removeItem(AUTH_TOKEN_STORAGE_NAME);
   }
 

@@ -16,7 +16,6 @@ interface ApiRequest<T> {
 export class ApiService {
 
   private rootEndpointUrl: string;
-  private connectedUserId: string;
   private apiRootLinks: APILink[];
   private apiLinks: APILink[];
 
@@ -38,12 +37,8 @@ export class ApiService {
     return this.loadGlobalRoot();
   }
 
-//FIXME: connected user Id should change when user disconnect
   protected getConnectedUserId(): Observable<string> {
-    if (this.connectedUserId) {
-      return Observable.of<string>(this.connectedUserId);
-    }
-    return this.loadGlobalRoot().map(() => this.connectedUserId);
+      return Observable.of<string>(Helper.getConnectedUserId());
   }
 
   protected getApiLinks = (): Observable<APILink[]> => {
@@ -99,7 +94,6 @@ export class ApiService {
   }
 
   private parseGlobalRoot = (rootAsJson: any): APILink[] => {
-    this.connectedUserId = rootAsJson.connectedUserId;
     this.apiRootLinks = this.parseRoot(rootAsJson);
     return this.apiRootLinks;
   }
