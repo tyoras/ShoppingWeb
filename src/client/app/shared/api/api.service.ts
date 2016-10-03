@@ -38,6 +38,7 @@ export class ApiService {
     return this.loadGlobalRoot();
   }
 
+//FIXME: connected user Id should change when user disconnect
   protected getConnectedUserId(): Observable<string> {
     if (this.connectedUserId) {
       return Observable.of<string>(this.connectedUserId);
