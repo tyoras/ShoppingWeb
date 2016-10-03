@@ -2,8 +2,12 @@ import { AUTH_TOKEN_STORAGE_NAME } from './constants';
 
 export class Helper {
 
-  public static getAuthToken(): String {
+  public static getAuthToken(): string {
     return localStorage.getItem(AUTH_TOKEN_STORAGE_NAME);
+  }
+
+  public static isAuthenticated(): boolean {
+    return !!Helper.getAuthToken();
   }
 
   public static Deserialize(data: string): any {
