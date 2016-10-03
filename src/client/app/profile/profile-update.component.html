@@ -28,4 +28,29 @@
     </div>
 
   </form>
+
+  <h2>Change password</h2>
+
+  <form class="col-sm-12" name="form" (ngSubmit)="changePassForm.form.valid && changePassword()" #changePassForm="ngForm" novalidate>
+
+    <div class="form-group" [ngClass]="{ 'has-error': changePassForm.submitted && !pw1.valid }">
+      <label for="pw1">New password</label>
+      <input type="password" class="form-control" name="pw1" [(ngModel)]="passwords[0]" #pw1="ngModel" required />
+      <div *ngIf="changePassForm.submitted && !pw1.valid" class="help-block">New password is required</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': changePassForm.submitted && !pw2.valid }">
+      <label for="pw2">Retype new password</label>
+      <input type="password" class="form-control" name="pw2" [(ngModel)]="passwords[1]" #pw2="ngModel" required />
+      <div *ngIf="changePassForm.submitted && !pw2.valid" class="help-block">Retyping new password is required</div>
+    </div>
+
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">Change</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+      <a [routerLink]="['/profile']" class="btn btn-link">Cancel</a>
+    </div>
+
+  </form>
 </div>
