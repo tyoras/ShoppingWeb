@@ -56,7 +56,7 @@ export class UserService extends ApiService {
   deleteById(userId: string): Observable<Response> {
     let replacements = { '%7BuserId%7D': userId };
     let request = (link: string) => this.http.delete(link, { headers: this.auth_accept_json() });
-    return super.requestAPI<Response>('getById', request, replacements);
+    return super.requestAPI<Response>('deleteById', request, replacements);
   }
 
   parseUser(response: Response): User {

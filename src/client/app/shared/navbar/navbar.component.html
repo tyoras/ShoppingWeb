@@ -1,6 +1,7 @@
 <nav>
   <a *ngIf="isAuthenticated()" [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
   <a *ngIf="isAuthenticated()" [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">PROFILE</a>
+  <a *ngIf="isAuthenticated()" [routerLink]="['/lists']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">LISTS</a>
   <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
   <button *ngIf="!isAuthenticated()" [routerLink]="['/login']">Login</button>
   <button *ngIf="isAuthenticated()" (click)="logout()">Logout</button>

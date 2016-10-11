@@ -8,6 +8,7 @@ export * from './helpers'
 export * from './config/env.config';
 export * from './auth/index';
 export * from './user/index';
+export * from './list/index';
 
 export * from './name-list/index';
 

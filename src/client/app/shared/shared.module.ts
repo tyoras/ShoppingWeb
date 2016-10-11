@@ -9,6 +9,7 @@ import { AlertComponent, AlertService } from './alert/index';
 import { NameListService } from './name-list/index';
 import { AuthService, AuthGuard } from './auth/index';
 import { RegisterUserService, UserService } from './user/index';
+import { ListService } from './list/index';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -24,7 +25,8 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [NameListService, AlertService, AuthService, AuthGuard, RegisterUserService, UserService]
+      providers: [NameListService, AlertService, AuthService, AuthGuard,
+                  RegisterUserService, UserService, ListService]
     };
   }
 }
