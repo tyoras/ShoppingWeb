@@ -32,32 +32,22 @@ export class ListService extends ApiService {
     });
   }
 
-  // getByEmail(email: string): Observable<User> {
-  //   let replacements = { '%7BuserEmail%7D': email };
-  //   let request = (link: string) => this.http.get(link, { headers: this.auth_accept_json() })
-  //     .map(this.parseUser);
-  //   return super.requestAPI<User>('getByEmail', request, replacements);
-  // }
-  //
-  // create(user: User): Observable<User> {
-  //   let serializedUser: string = JSON.stringify(user);
-  //   let request = (link: string) => this.http.post(link, serializedUser, { headers: this.auth_accept_content_type_json() })
-  //     .map(this.parseUser);
-  //   return super.requestAPI<User>('create', request);
-  // }
-  //
-  // update(user: User): Observable<Response> {
-  //   let replacements = { '%7BuserId%7D': user.id };
-  //   let serializedUser: string = JSON.stringify(user);
-  //   let request = (link: string) => this.http.put(link, serializedUser, { headers: this.auth_accept_content_type_json() });
-  //   return super.requestAPI<Response>('update', request, replacements);
-  // }
-  //
-  // changePassword(userId: string, password: string): Observable<Response> {
-  //   let replacements = { '%7BuserId%7D': userId, '%7BnewPassword%7D': password };
-  //   let request = (link: string) => this.http.put(link, null, { headers: this.auth_accept_content_type_json() });
-  //   return super.requestAPI<Response>('changePassword', request, replacements);
-  // }
+  create(list: List): Observable<List> {
+    return super.getConnectedUserId().flatMap(userId => {
+      list.ownerId = userId;
+      let serializedList: string = JSON.stringify(list);
+      let request = (link: string) => this.http.post(link, serializedList, { headers: this.auth_accept_content_type_json() })
+        .map(this.parseList);
+      return super.requestAPI<List>('create', request);
+    });
+  }
+
+  update(list: List): Observable<Response> {
+    let replacements = { '%7BlistId%7D': list.id };
+    let serializedList: string = JSON.stringify(list);
+    let request = (link: string) => this.http.put(link, serializedList, { headers: this.auth_accept_content_type_json() });
+    return super.requestAPI<Response>('update', request, replacements);
+  }
 
   deleteById(listId: string): Observable<Response> {
     let replacements = { '%7BlistId%7D': listId };
