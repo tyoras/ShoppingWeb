@@ -57,7 +57,7 @@ export class ManageListComponent implements OnInit {
       );
   }
 
-  create() {
+  update() {
     this.loading = true;
 
     this.listService.update(this.list).subscribe(
