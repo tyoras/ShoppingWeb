@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NameListService, AlertService } from '../shared/index';
+import { AlertService } from '../shared/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -9,7 +9,6 @@ import { NameListService, AlertService } from '../shared/index';
   moduleId: module.id,
   selector: 'sweb-home',
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
 })
 
 export class HomeComponent implements OnInit {
@@ -20,40 +19,17 @@ export class HomeComponent implements OnInit {
 
   /**
    * Creates an instance of the HomeComponent with the injected
-   * NameListService.
+   * AlertService.
    *
-   * @param {NameListService} nameListService - The injected NameListService.
+   * @param {AlertService} alertService - The injected AlertService.
    */
-  constructor(public nameListService: NameListService, private alertService: AlertService) { }
+  constructor(private alertService: AlertService) { }
 
   /**
    * Get the names OnInit
    */
   ngOnInit() {
-    this.getNames();
-  }
-
-  /**
-   * Handle the nameListService observable
-   */
-  getNames() {
-    this.nameListService.get()
-      .subscribe(
-      names => this.names = names,
-      error => this.errorMessage = <any>error
-      );
-  }
-
-  /**
-   * Pushes a new name onto the names array
-   * @return {boolean} false to prevent default form submit behavior to refresh the page.
-   */
-  addName(): boolean {
-    // TODO: implement nameListService.post
-    this.names.push(this.newName);
-    this.alertService.error(this.newName);
-    this.newName = '';
-    return false;
+    //this.getConnectedUser();
   }
 
 }

@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { ToolbarComponent } from './toolbar/index';
 import { NavbarComponent } from './navbar/index';
 import { AlertComponent, AlertService } from './alert/index';
-import { NameListService } from './name-list/index';
 import { AuthService, AuthGuard } from './auth/index';
 import { RegisterUserService, UserService } from './user/index';
 import { ListService } from './list/index';
@@ -26,7 +25,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [NameListService, AlertService, AuthService, AuthGuard,
+      providers: [AlertService, AuthService, AuthGuard,
                   RegisterUserService, UserService, ListService, ItemService]
     };
   }

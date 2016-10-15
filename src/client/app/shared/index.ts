@@ -10,8 +10,6 @@ export * from './auth/index';
 export * from './user/index';
 export * from './list/index';
 
-export * from './name-list/index';
-
 export * from './alert/index';
 
 export * from './navbar/index';
