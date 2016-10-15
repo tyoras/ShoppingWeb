@@ -20,7 +20,7 @@ export class NavbarComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
-    this.alertService.success("Logged out");
+    this.alertService.success('Logged out');
   }
 
   isAuthenticated(): boolean {

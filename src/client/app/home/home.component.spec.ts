@@ -12,7 +12,6 @@ import {
 } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
-import { NameListService } from '../shared/index';
 import { HomeModule } from './home.module';
 import { UserService } from '../shared/index';
 
@@ -25,7 +24,6 @@ export function main() {
         imports: [FormsModule, RouterModule, HttpModule, HomeModule],
         declarations: [TestComponent],
         providers: [
-          NameListService,
           UserService,
           BaseRequestOptions,
           MockBackend,
@@ -49,7 +47,6 @@ export function main() {
             let homeInstance = fixture.debugElement.children[0].componentInstance;
             let homeDOMEl = fixture.debugElement.children[0].nativeElement;
 
-            expect(homeInstance.nameListService).toEqual(jasmine.any(NameListService));
             expect(homeDOMEl.querySelectorAll('li').length).toEqual(0);
 
             homeInstance.newName = 'Minko';

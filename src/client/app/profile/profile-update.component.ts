@@ -82,7 +82,7 @@ export class ProfileUpdateComponent implements OnInit {
         }
       );
     } else {
-      this.alertService.error("Please type the new password twice.");
+      this.alertService.error('Please type the new password twice.');
       this.loading = false;
     }
   }

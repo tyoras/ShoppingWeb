@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ListService, ItemService, UserService, AlertService, List, User, Item } from '../shared/index';
+import { ListService, ItemService, UserService, AlertService, List, User } from '../shared/index';
 
 /**
  * This class represents the lazy loaded ManageListsComponent.
@@ -16,10 +16,10 @@ export class ManageListComponent implements OnInit {
 
   errorMessage: string;
   loading = false;
-  private routeParamSub: any;
   list: List;
   owner: User;
   newItem: any = { quantity : 1 };
+  private routeParamSub: any;
 
   /**
    * Creates an instance of the ManageListsComponent with the injected services.
