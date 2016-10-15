@@ -13,4 +13,3 @@ export * from './list/index';
 export * from './alert/index';
 
 export * from './navbar/index';
-export * from './toolbar/index';

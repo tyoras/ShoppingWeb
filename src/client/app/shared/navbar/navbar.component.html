@@ -1,8 +1,25 @@
-<nav>
-  <a *ngIf="isAuthenticated()" [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
-  <a *ngIf="isAuthenticated()" [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">PROFILE</a>
-  <a *ngIf="isAuthenticated()" [routerLink]="['/lists']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">LISTS</a>
-  <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
-  <button *ngIf="!isAuthenticated()" [routerLink]="['/login']">Login</button>
-  <button *ngIf="isAuthenticated()" (click)="logout()">Logout</button>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sweb-nav">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/']">Shopping App</a>
+    </div>
+    <div class="collapse navbar-collapse" id="sweb-nav">
+      <ul class="nav navbar-nav">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']">HOME</a></li>
+        <li *ngIf="isAuthenticated()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/profile']">PROFILE</a></li>
+        <li *ngIf="isAuthenticated()" [routerLinkActive]="['active']"><a [routerLink]="['/lists']">LISTS</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/about']">ABOUT</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="!isAuthenticated()"><a [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li *ngIf="!isAuthenticated()"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li *ngIf="isAuthenticated()"><a (click)="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>

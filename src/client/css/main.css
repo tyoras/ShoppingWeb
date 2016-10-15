@@ -1,25 +1,39 @@
 /* Reset */
-html,
-body,
-div {
+
+html, body, div {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-/* Box-sizing border-box */
-* {
-  box-sizing: border-box;
+footer {
+  background-color: #555;
+  padding: 10px;
 }
 
-/* Set up a default font and some padding to provide breathing room */
+footer>p>a {
+  color: #4bbdd9;
+}
+
+footer>p>a:hover {
+  color: #60e0ff;
+}
+
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
+  background-color: #4bbdd9;
+  color: #4bbdd9;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.panel-default{
+  background-color: #312b2a;
+}
+
+
+/*
 p {
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -60,4 +74,4 @@ button {
 
 button:hover {
   background-color: #28739e;
-}
+}*/

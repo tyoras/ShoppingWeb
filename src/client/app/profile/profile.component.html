@@ -1,15 +1,16 @@
 <div *ngIf="user">
-  <h2>{{user.name}} details : </h2>
+
+  <div class="page-header">
+    <h2>{{user.name}} details : </h2>
+  </div>
   <img src="http://www.gravatar.com/avatar/{{gravatarId}}?d=identicon" class="row, col-sm-2" alt="avatar" />
 
   <div><label>id: </label>{{user.id}}</div>
   <div>
-    <label>name: </label>
-    {{user.name}}
+    <label>name: </label> {{user.name}}
   </div>
   <div>
-    <label>email: </label>
-    {{user.email}}
+    <label>email: </label> {{user.email}}
   </div>
   <div>
     <label>creation date: </label> {{user.creationDate | date:'medium'}}
@@ -17,5 +18,5 @@
   <div>
     <label>last update: </label> {{user.lastUpdate | date:'medium'}}
   </div>
-	<button [routerLink]="['/profile/update']">Update</button>
+  <button [routerLink]="['/profile/update']">Update</button>
 </div>
