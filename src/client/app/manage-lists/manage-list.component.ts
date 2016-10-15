@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ListService, UserService, AlertService, List, User } from '../shared/index';
+import { ListService, ItemService, UserService, AlertService, List, User, Item } from '../shared/index';
 
 /**
  * This class represents the lazy loaded ManageListsComponent.
@@ -19,6 +19,7 @@ export class ManageListComponent implements OnInit {
   private routeParamSub: any;
   list: List;
   owner: User;
+  newItem: any = { quantity : 1 };
 
   /**
    * Creates an instance of the ManageListsComponent with the injected services.
@@ -27,8 +28,8 @@ export class ManageListComponent implements OnInit {
    * @param {AlertService} alertService - The injected AlertService.
    */
   constructor(private router: Router, private route: ActivatedRoute,
-    private listService: ListService, private userService: UserService,
-    private alertService: AlertService) { }
+    private listService: ListService, private itemService: ItemService,
+    private userService: UserService, private alertService: AlertService) { }
 
   /**
    * Get the user OnInit
@@ -79,6 +80,21 @@ export class ManageListComponent implements OnInit {
       response => {
         this.alertService.success(`${this.list.name} deleted successfully`, true);
         this.router.navigate(['/lists']);
+      },
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
+  }
+
+  addItem() {
+    this.loading = true;
+    this.itemService.create(this.list.id, this.newItem).subscribe(
+      createdItem => {
+        this.alertService.success(`${this.newItem.name} added successfully`, true);
+        this.loading = false;
+        this.list.itemList.push(createdItem);
       },
       error => {
         this.alertService.error(error);
