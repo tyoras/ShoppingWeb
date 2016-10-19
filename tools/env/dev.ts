@@ -5,7 +5,7 @@ const DevConfig: EnvConfig = {
   client_id : 'd1f53029-9732-4d00-ba8e-0304020bef6b',
   backend : {
     protocol : 'https',
-    host : 'shopping-app.io',
+    host : 'localhost',
     port : 8443,
     root : 'shopping/rest',
     api_endpoint : '/api',
