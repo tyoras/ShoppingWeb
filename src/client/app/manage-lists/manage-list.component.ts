@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ListService, ItemService, UserService, AlertService, List, User } from '../shared/index';
+import { ListService, ItemService, UserService, AlertService, List, Item, User } from '../shared/index';
 
 /**
- * This class represents the lazy loaded ManageListsComponent.
+ * This class represents the lazy loaded ManageListComponent.
  */
 @Component({
   moduleId: module.id,
   selector: 'sweb-manage-list',
-  templateUrl: 'manage-list.component.html'
+  templateUrl: 'manage-list.component.html',
+  styleUrls: ['manage-list.component.css']
 })
-
 export class ManageListComponent implements OnInit {
 
   errorMessage: string;
@@ -22,9 +22,10 @@ export class ManageListComponent implements OnInit {
   private routeParamSub: any;
 
   /**
-   * Creates an instance of the ManageListsComponent with the injected services.
+   * Creates an instance of the ManageListComponent with the injected services.
    *
    * @param {ListService} listService - The injected ListService.
+   * @param {ItemService} itemService - The injected ItemService.
    * @param {AlertService} alertService - The injected AlertService.
    */
   constructor(private router: Router, private route: ActivatedRoute,
@@ -32,7 +33,7 @@ export class ManageListComponent implements OnInit {
     private userService: UserService, private alertService: AlertService) { }
 
   /**
-   * Get the user OnInit
+   * Get the list OnInit
    */
   ngOnInit() {
     this.routeParamSub = this.route.params.subscribe(params => {
@@ -95,6 +96,7 @@ export class ManageListComponent implements OnInit {
         this.alertService.success(`${this.newItem.name} added successfully`, true);
         this.loading = false;
         this.list.itemList.push(createdItem);
+        this.newItem = { quantity : 1 };
       },
       error => {
         this.alertService.error(error);
@@ -102,5 +104,28 @@ export class ManageListComponent implements OnInit {
       }
     );
   }
+
+  deleteItem(item: Item) {
+    this.loading = true;
+    this.itemService.deleteById(this.list.id, item.id).subscribe(
+      response => {
+        this.alertService.success(`${item.name} deleted successfully`, true);
+        let index = this.list.itemList.indexOf(item);
+        this.list.itemList.splice(index);
+        this.loading = false;
+        let link = ['/list', this.list.id];
+    		this.router.navigate(link);
+      },
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
+  }
+
+  gotoItem(item: Item) {
+		let link = ['/list', this.list.id, item.id];
+		this.router.navigate(link);
+	}
 
 }

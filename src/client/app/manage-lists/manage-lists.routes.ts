@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ManageListsComponent, ManageListComponent } from './index';
+import { ManageListsComponent, ManageListComponent, ManageItemComponent } from './index';
 import { AuthGuard } from '../shared/index';
 
 export const ManageListsRoutes: Route[] = [
@@ -11,6 +11,11 @@ export const ManageListsRoutes: Route[] = [
   {
       path: 'list/:id',
       component: ManageListComponent,
+      canActivate: [AuthGuard]
+  },
+  {
+      path: 'list/:listId/:itemId',
+      component: ManageItemComponent,
       canActivate: [AuthGuard]
   }
 ];

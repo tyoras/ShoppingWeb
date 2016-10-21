@@ -9,9 +9,9 @@ import { ListService, AlertService, List } from '../shared/index';
 @Component({
   moduleId: module.id,
   selector: 'sweb-manage-lists',
-  templateUrl: 'manage-lists.component.html'
+  templateUrl: 'manage-lists.component.html',
+  styleUrls: ['manage-lists.component.css']
 })
-
 export class ManageListsComponent implements OnInit {
 
   errorMessage: string;
@@ -28,7 +28,7 @@ export class ManageListsComponent implements OnInit {
   constructor(private router: Router,private listService: ListService, private alertService: AlertService) { }
 
   /**
-   * Get the user OnInit
+   * Get the lists OnInit
    */
   ngOnInit() {
     this.getUserLists();

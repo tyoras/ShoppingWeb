@@ -10,10 +10,10 @@
     </div>
     <div class="collapse navbar-collapse" id="sweb-nav">
       <ul class="nav navbar-nav">
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']">HOME</a></li>
-        <li *ngIf="isAuthenticated()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/profile']">PROFILE</a></li>
-        <li *ngIf="isAuthenticated()" [routerLinkActive]="['active']"><a [routerLink]="['/lists']">LISTS</a></li>
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/about']">ABOUT</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
+        <li *ngIf="isAuthenticated()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/profile']"><span class="glyphicon glyphicon-user"></span> PROFILE</a></li>
+        <li *ngIf="isAuthenticated()" [routerLinkActive]="['active']"><a [routerLink]="['/lists']"><span class="glyphicon glyphicon-list-alt"></span> LISTS</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/about']"><span class="glyphicon glyphicon-question-sign"></span> ABOUT</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="!isAuthenticated()"><a [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Register</a></li>

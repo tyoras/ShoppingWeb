@@ -1,22 +1,21 @@
 <div *ngIf="user">
 
   <div class="page-header">
-    <h2>{{user.name}} details : </h2>
+    <h2>General informations</h2>
   </div>
   <img src="http://www.gravatar.com/avatar/{{gravatarId}}?d=identicon" class="row, col-sm-2" alt="avatar" />
 
-  <div><label>id: </label>{{user.id}}</div>
   <div>
-    <label>name: </label> {{user.name}}
+    <label>Name: </label> {{user.name}}
   </div>
   <div>
-    <label>email: </label> {{user.email}}
+    <label>Email: </label> {{user.email}}
   </div>
   <div>
-    <label>creation date: </label> {{user.creationDate | date:'medium'}}
+    <label>Joined: </label> {{user.creationDate | date:'medium'}}
   </div>
   <div>
-    <label>last update: </label> {{user.lastUpdate | date:'medium'}}
+    <label>Last update: </label> {{user.lastUpdate | date:'medium'}}
   </div>
   <button [routerLink]="['/profile/update']">Update</button>
 </div>
