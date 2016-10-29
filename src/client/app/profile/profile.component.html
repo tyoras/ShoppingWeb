@@ -3,19 +3,21 @@
   <div class="page-header">
     <h2>General informations</h2>
   </div>
-  <img src="http://www.gravatar.com/avatar/{{gravatarId}}?d=identicon" class="row, col-sm-2" alt="avatar" />
-
-  <div>
-    <label>Name: </label> {{user.name}}
+  <div class="media">
+  <div class="media-left">
+    <img src="http://www.gravatar.com/avatar/{{gravatarId}}?d=identicon" class="media-object"  alt="avatar" />
   </div>
-  <div>
-    <label>Email: </label> {{user.email}}
-  </div>
-  <div>
-    <label>Joined: </label> {{user.creationDate | date:'medium'}}
-  </div>
-  <div>
-    <label>Last update: </label> {{user.lastUpdate | date:'medium'}}
-  </div>
-  <button [routerLink]="['/profile/update']">Update</button>
+  <div class="media-body">
+    <dl class="dl-horizontal">
+      <dt>Name:</dt>
+      <dd>{{user.name}}</dd>
+      <dt>Email:</dt>
+      <dd>{{user.email}}</dd>
+      <dt>Joined:</dt>
+      <dd>{{user.creationDate | date:'medium'}}</dd>
+      <dt>Last update:</dt>
+      <dd>{{user.lastUpdate | date:'medium'}}</dd>
+    </dl>
+</div>
+  <button class="btn btn-primary" [routerLink]="['/profile/update']">Update</button>
 </div>

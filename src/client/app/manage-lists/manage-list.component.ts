@@ -110,7 +110,7 @@ export class ManageListComponent implements OnInit {
     this.itemService.deleteById(this.list.id, item.id).subscribe(
       response => {
         this.alertService.success(`${item.name} deleted successfully`, true);
-        let index = this.list.itemList.indexOf(item);
+        let index = this.findItemIndex(item);
         this.list.itemList.splice(index);
         this.loading = false;
         let link = ['/list', this.list.id];
@@ -127,5 +127,29 @@ export class ManageListComponent implements OnInit {
 		let link = ['/list', this.list.id, item.id];
 		this.router.navigate(link);
 	}
+
+  changeState(item: Item) {
+    this.itemService.changeItemState(this.list.id, item).subscribe(
+      response => this.getList(this.list.id),
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
+  }
+
+  cancelItem(item: Item) {
+    this.itemService.cancelItem(this.list.id, item).subscribe(
+      response => this.getList(this.list.id),
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
+  }
+
+  private findItemIndex(item: Item) {
+    return this.list.itemList.indexOf(item);
+  }
 
 }

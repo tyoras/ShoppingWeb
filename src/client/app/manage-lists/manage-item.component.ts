@@ -82,6 +82,33 @@ export class ManageItemComponent implements OnInit {
     );
   }
 
+  changeState() {
+    this.itemService.changeItemState(this.listId, this.item).subscribe(
+      response => {
+        this.loading = false;
+        this.getItem(this.item.id);
+      },
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
+  }
+
+  cancelItem() {
+    this.loading = true;
+    this.itemService.cancelItem(this.listId, this.item).subscribe(
+      response => {
+        this.loading = false;
+        this.getItem(this.item.id);
+      },
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
+  }
+
   gotoList() {
 		let link = ['/list', this.listId];
 		this.router.navigate(link);

@@ -38,6 +38,22 @@ export class ItemService extends ApiService {
     return super.requestAPI<Response>('update', request, replacements);
   }
 
+  changeItemState(listId: string, item: Item): Observable<Response> {
+    let currentState = item.state;
+    let newState = 'BOUGHT';
+    if (currentState === 'BOUGHT' || currentState === 'CANCELLED') {
+      newState = 'TO_BUY';
+    }
+    item.state = newState;
+    return this.update(listId, item);
+  }
+
+  cancelItem(listId: string, item: Item): Observable<Response> {
+    let currentState = item.state;
+    item.state = 'CANCELLED';
+    return this.update(listId, item);
+  }
+
   deleteById(listId: string, itemId: string): Observable<Response> {
     let replacements = { '%7BlistId%7D': listId, '%7BitemId%7D': itemId };
     let request = (link: string) => this.http.delete(link, { headers: this.auth_accept_json() });
