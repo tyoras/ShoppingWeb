@@ -48,8 +48,8 @@ export class UserService extends ApiService {
   }
 
   changePassword(userId: string, password: string): Observable<Response> {
-    let replacements = { '%7BuserId%7D': userId, '%7BnewPassword%7D': password };
-    let request = (link: string) => this.http.put(link, null, { headers: this.auth_accept_content_type_json() });
+    let replacements = { '%7BuserId%7D': userId };
+    let request = (link: string) => this.http.put(link, password, { headers: this.auth_accept_json() });
     return super.requestAPI<Response>('changePassword', request, replacements);
   }
 
